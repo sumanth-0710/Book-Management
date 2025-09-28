@@ -23,6 +23,7 @@ type Mutation {
     addBook(book: BookInput): Book
     updateBook(bookId: ID!, book: BookInput): Book
     deleteBook(bookId: ID!): String
+    addAuthor(author: AuthorInput): Author
 }
 
 type Book {
@@ -45,4 +46,11 @@ type Author {
     dob: String
     address: String
     books(first: Int, after: String): BookConnection
+}
+
+input AuthorInput {
+    name: String!
+    phoneNumber: String
+    dob: String
+    address: String
 }
