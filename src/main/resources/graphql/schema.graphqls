@@ -1,0 +1,48 @@
+type Query {
+    getAllBooks: [Book]
+    getBookById(bookId: ID!): Book
+    getAllBooksByPages(first: Int, after: String): BookConnection
+}
+
+type BookConnection {
+    edges: [BookEdge]
+    pageInfo: PageInfo
+}
+
+type BookEdge {
+    cursor: String
+    node: Book
+}
+
+type PageInfo {
+    endCursor: String
+    hasNextPage: Boolean
+}
+
+type Mutation {
+    addBook(book: BookInput): Book
+    updateBook(bookId: ID!, book: BookInput): Book
+    deleteBook(bookId: ID!): String
+}
+
+type Book {
+    bookId: ID!
+    title: String
+    author: Author
+    publishedYear: Int
+}
+
+input BookInput {
+    title: String
+    authorId: ID!
+    publishedYear: Int
+}
+
+type Author {
+    authorId: ID!
+    name: String
+    phoneNumber: String
+    dob: String
+    address: String
+    books(first: Int, after: String): BookConnection
+}
